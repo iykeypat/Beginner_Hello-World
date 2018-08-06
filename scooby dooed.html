@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<meta name="description" content="Andela Nigeria Cycle 35 Technical Challenge" />
+
+<title>Scooby Doo</title>
+
+<script type="text/javascript" language="javascript">
+
+//this function returns true if user enters nothing but space(s)
+function checkForEmptyParameter(word) {
+	return (word.trim() == 0)? true:false;
+  /*var count = 0;
+  var check = "";
+  if (word === "") {
+    check = true;
+    return check;
+  } else {
+    for (i = 0; i < word.length; i++) {
+      var char = word.charAt(i);
+      if (char == " ") count += 1;
+    } //end of  for-loop
+
+    if (count == word.length) {
+      check = true;
+      return check;
+    } else {
+      check = false;
+      return check;
+    }
+  } //end of outmost if ... else statement */
+} //end of function
+
+function performScoobyDoo() {
+  var text_input = document.getElementById("word_input");
+
+  var initial_word = text_input.value;
+  var scooby_dooed = "";
+
+  //check for empty parameter
+  var check = checkForEmptyParameter(initial_word);
+
+  if (check === true) {
+    alert(
+      "No word/sentence entered. Please enter a word/sentence and try again."
+    );
+	
+	var text_area = document.getElementById("word_input");
+	text_area.value = "";
+	text_area.focus();
+  } else {
+    initial_word = initial_word + " ";
+    initial_word = initial_word.toLowerCase();
+    var vowels = ["a", "e", "i", "o", "u"];
+    var temp_array = [];
+    var counter = 0;
+    var alphabet = "az";
+
+    for (i = 0; i < initial_word.length; i++) {
+      character = initial_word.charAt(i);
+
+      for (j = 0; j < vowels.length; j++) {
+        if (
+          character == vowels[j] ||
+          initial_word.charCodeAt(i) < alphabet.charCodeAt(0) ||
+          initial_word.charCodeAt(i) > alphabet.charCodeAt(1)
+        ) {
+          if (
+            initial_word.charCodeAt(i) < alphabet.charCodeAt(0) ||
+            initial_word.charCodeAt(i) > alphabet.charCodeAt(1)
+          ) {
+            temp_array[counter] = initial_word.substring(
+              i,
+              initial_word.indexOf(" ") + 1
+            );
+            initial_word = initial_word.substring(
+              initial_word.indexOf(" ") + 1,
+              initial_word.length
+            );
+
+            counter += 1;
+            i = -1;
+            break;
+          } else {
+            temp_array[counter] =
+              "r" + initial_word.substring(i, initial_word.indexOf(" ") + 1);
+            initial_word = initial_word.substring(
+              initial_word.indexOf(" ") + 1,
+              initial_word.length
+            );
+
+            counter += 1;
+            i = -1;
+            break;
+          } //end of inner if...else statement
+        }
+      } //end of inner for-loop
+    } //end of outmost for loop
+
+    //now concat. all words in temp_array into a sentence.
+    for (k = 0; k < temp_array.length; k++) {
+      scooby_dooed += temp_array[k];
+    }
+
+    var output = document.getElementById("word_output");
+	output.value = scooby_dooed;
+  } //end of outmost if...else statement
+} //end of function
+
+//this function clears the input text area of all texts.
+function clearText() {
+  var text_area = document.getElementById("word_input");
+  var text_area_2 = document.getElementById("word_output");
+
+  text_area.value = "";
+  text_area.focus();
+  text_area_2.value =
+    "The 'scooby dooed' word/sentence will be displayed here.";
+} //end of function
+
+</script>
+
+<style type="text/css">
+
+body {
+	background:url(scooby_doo_background.png);
+	background-size:cover;
+	background-position: center; padding:0px 0px 0px 0px; margin: 0px 0px 0px 0px; width:1000px;}
+	
+#introduction {background-color:#603; margin:0px 0px 0px 0px; padding:0px 0px 0px 0px; border-color:#603; border-width: medium; width:290px; height:190px; float: right; border-bottom-left-radius:10px;
+	border-top-left-radius: 10px;}
+
+#text_area{
+	margin:0px 0px 0px 0px; padding:0px 0px 0px 5px; height:200px; float:right;
+	}
+#content{
+	text-align: center;
+	margin:0px 0px 0px 0px; padding:0px 45px 0px 55px; height: 200px;
+	}
+
+textarea{
+color:#603; border-color:#603; border-width: medium; width: 270px;
+height:165px; padding: 10px 10px 10px 10px; float:right; resize:none; overflow:auto;
+}
+
+#word_output{
+	border-bottom-right-radius:10px;
+	border-top-right-radius: 10px;
+}
+
+#buttons {
+	text-align:center; margin:0px 0px 0px 0px; padding:0px 50px 0px 0px;}
+
+input{
+background:#603; border-radius:10px;  box-shadow:#999; color:#FFF; float:right; padding:10px; font-size:14px; font-weight: bolder; box-shadow:#FFF;
+}
+
+#welcome{
+color:white; font-family:"Lucida Sans Unicode", "Lucida Grande", sans-serif; font-size:13px; text-align:center;
+}
+
+
+#warning{
+color:white; font-family:"Lucida Sans Unicode", "Lucida Grande", sans-serif; font-size:9px; float:right; text-align:right;
+}
+
+
+</style>
+
+</head>
+
+
+
+<body>
+<br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/> 
+
+<div id="content">
+
+<div id="text_area">
+<textarea id="word_output" placeholder="The 'scooby dooed' word/sentence will be displayed here." readonly></textarea>
+
+<textarea id="word_input" placeholder="Enter Your texts here and click 'ENTER' button bellow.">
+</textarea>
+
+</div>
+
+<div id = "introduction">
+<p id="welcome"><strong style="font-size:20px;">WELCOME!</strong><br/> This program replaces all consonants at the start of a word until it
+runs into a vowel  <br />with an "r" (Just like Scooby Doo). For example, the word "scooby" would become
+"rooby" and “xylophone” would become “rophone”.</p></div>
+
+</div>
+
+<div id="buttons">
+<p id="warning">
+<strong>NOTE:</strong> <br />Numbers and special characters such as '-', '%' are <br />not directly 'scooby dooed'. Rather, they are implied <br />to be 'scooby dooed' as you pronunce them.
+</p>
+<input type="button" id="clear" value="CLEAR" onclick="clearText();" />
+
+<input type="button" id="enter" value="ENTER" onClick="performScoobyDoo();" />
+
+
+</div>
+
+
+
+</body>
+
+</html>
